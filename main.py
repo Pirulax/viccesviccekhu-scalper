@@ -19,7 +19,7 @@ def thread_scraper_fn(q, page_info):
         soup = bs.BeautifulSoup(requests.get('https://www.viccesviccek.hu/' + page_href).text, "lxml") 
         print(f"Got data and parsed page {page_href} in {(time.time() - req_start_time) * 1000} ms")
 
-        for jid in (6, 8, 10, 14, 16, 18, 20, 24, 26, 28):
+        for jid in (6, 8, 10, 14, 16, 18, 20, 24, 26, 28): # Iterate thru all childs. 12 and 22 are ads, so skip those
             matches = soup.select(f"body center center:nth-child(2) table tr:nth-child(2) td:nth-child(3) table tr td table:nth-child({jid}) tr:nth-child(2) td")
             if len(matches) == 0: # No match means that the page has no more content, which means that there are no more pages
                 print("Break 25 " + page_info["name"])
